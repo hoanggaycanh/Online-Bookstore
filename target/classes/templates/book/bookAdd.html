@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/_layout}">
+
+<head>
+    <title>A Plus Book</title>
+    <link rel="stylesheet" th:href="@{/css/products.css}" type="text/css" />
+</head>
+<body>
+<div layout:fragment="content">
+    <form
+            class="container-sm bg-main-lighter my-5 px-5 py-4 rounded"
+            method="post"
+            style="max-width: 720px"
+            th:action="@{/book/insert}"
+            th:object="${book}"
+            enctype="multipart/form-data"
+    >
+        <h3 class="text-center mb-3">Add new book</h3>
+        <p th:if="${image==null}" th:text="${image}"></p>
+        <div class="mb-2">
+            <label for="title" class="form-label">Title</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    th:field="*{title}"
+                    placeholder="Please enter book's title"
+            />
+            <p th:if="${#fields.hasErrors('title')}"
+               class="text-danger fst-italic err-msg" th:errors="*{title}"></p>
+        </div>
+        <div class="mb-2">
+            <label for="title" class="form-label">Description</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="description"
+                    th:field="*{description}"
+                    placeholder="Please enter book's description"
+            />
+            <p th:if="${#fields.hasErrors('description')}"
+               class="text-danger fst-italic err-msg" th:errors="*{description}"></p>
+        </div>
+        <div class="mb-2">
+            <label for="publishedDate" class="form-label">Published Date</label>
+            <input
+                    type="date"
+                    class="form-control"
+                    id="publishedDate"
+                    th:field="*{publishedDate}"
+                    placeholder="Please enter book's published date"
+            />
+        </div>
+        <div class="mb-2">
+            <label for="title" class="form-label">ISBN</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="ISBN"
+                    th:field="*{ISBN}"
+                    placeholder="Please enter book's ISBN"
+            />
+            <p th:if="${#fields.hasErrors('ISBN')}"
+               class="text-danger fst-italic err-msg" th:errors="*{ISBN}"></p>
+        </div>
+        <div class="mb-2">
+            <label for="price" class="form-label">Price</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="price"
+                    th:field="*{price}"
+                    placeholder="Please enter book's price"
+            />
+        </div>
+        <div class="mb-2">
+            <label for="quantityImport" class="form-label"
+            >Quantity Import</label
+            >
+            <input
+                    type="text"
+                    class="form-control"
+                    id="quantityImport"
+                    th:field="*{quantityImport}"
+                    placeholder="Please enter book's quantity imported"
+            />
+        </div>
+        <div class="mb-2">
+            <label for="publisher" class="form-label">Publisher</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="publisher"
+                    th:field="*{publisher}"
+                    placeholder="Please enter book's publisher"
+            />
+        </div>
+        <div class="mb-2">
+            <label for="author" class="form-label">Author</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="author"
+                    th:field="*{author}"
+                    placeholder="Please enter book's author"
+            />
+        </div>
+        <div class="mb-2">
+            <label for="image" class="form-label">Image</label>
+            <input
+                    type="file"
+                    accept="image/*"
+                    class="form-control"
+                    id="image"
+                    name="image"
+            />
+            <p th:if="${#fields.hasErrors('image')}"
+               class="text-danger fst-italic err-msg" th:errors="*{image}"></p>
+        </div>
+        <select class="form-select" aria-label="Default select example" th:field="*{category}">
+            <option selected disabled value="">Category</option>
+            <option th:each="category:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+        <div class="d-grid gap-2 d-flex justify-content-end mt-3">
+            <button
+                    type="submit"
+                    class="btn bg-main px-2 text-light"
+                    style="width: 80px"
+            >
+                Add
+            </button>
+            <a
+                    class="btn bg-secondary px-2 text-light"
+                    style="width: 80px"
+                    href="/account/manage-products"
+            >
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

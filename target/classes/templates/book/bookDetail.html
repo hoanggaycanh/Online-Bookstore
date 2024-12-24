@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/_layout}">
+
+<head>
+    <title th:text="${book.title}"></title>
+    <link rel="stylesheet" th:href="@{/css/products.css}" type="text/css" />
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-md">
+        <div class="row">
+            <div class="col-7" th:each="book: ${book}">
+                <div class="row">
+                    <div class="col-5 py-3 border">
+                        <img th:src="${book.image}"
+                             class="card-img-top" alt="Image book detail">
+                    </div>
+                    <div class="col-7 pt-4 px-4">
+                        <div>
+                            <h5  th:text="${book.title}">Book title
+                            </h5>
+                            <div class="d-flex align-items-end">
+                                <h5 class="text-danger" style="width: 8rem;"  th:text="${book.price}+ '$'"></h5>
+                            </div>
+                            <div class="my-4">
+                                <h6 class="d-block">Quantity:
+                                    <input class="text-center" type="number" value="1" min="0" max="100" step="1" />
+                                </h6>
+                            </div>
+                            <div class="py-2" style="width: 600px">
+                                <a class="btn btn-success" style="width:10rem;" th:href="@{/cart/checkout}">Buy Now</a>
+                                <a class="btn btn-primary" style="width: 10rem; background-color: white; color: #07689f;" th:href="@{/my-cart}">Add to
+                                    cart</a>
+                            </div>
+
+                            <div class="mt-3">
+                                <h6 th:text="'Sold: '+${book.quantitySold}"></h6>
+                                <h6 th:text="'Stock: '+${book.quantityInStock}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col border ms-2">
+                    <div class= "py-4 px-4" style="height: 300px;" th:each="book: ${book}">
+                        <h6>Book Description</h6>
+                        <p th:text="${book.description}"></p>
+                    </div>
+
+                </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>
